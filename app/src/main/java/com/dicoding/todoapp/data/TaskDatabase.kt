@@ -12,6 +12,7 @@ import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
+import java.util.concurrent.Executors
 
 //TODO 3 : Define room database class and prepopulate database using JSON
 @Database(entities = [Task::class], version = 1)
@@ -35,8 +36,10 @@ abstract class TaskDatabase : RoomDatabase() {
                         object : Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
                                 super.onCreate(db)
-                                val dao = getInstance(context).taskDao()
-                                fillWithStartingData(context, dao)
+                                Executors.newSingleThreadScheduledExecutor().execute {
+                                    val dao = getInstance(context).taskDao()
+                                    fillWithStartingData(context, dao)
+                                }
                             }
                         }
                     )
