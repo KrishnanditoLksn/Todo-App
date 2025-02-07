@@ -36,7 +36,7 @@ abstract class TaskDatabase : RoomDatabase() {
                         object : Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
                                 super.onCreate(db)
-                                Executors.newSingleThreadScheduledExecutor().execute {
+                                Executors.newSingleThreadExecutor().execute {
                                     val dao = getInstance(context).taskDao()
                                     fillWithStartingData(context, dao)
                                 }
