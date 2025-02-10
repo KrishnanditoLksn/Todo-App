@@ -1,5 +1,6 @@
 package com.dicoding.todoapp.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.todoapp.R
 import com.dicoding.todoapp.ui.ViewModelFactory
+import com.dicoding.todoapp.ui.list.TaskActivity
 import com.dicoding.todoapp.utils.TASK_ID
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -46,6 +48,8 @@ class DetailTaskActivity : AppCompatActivity() {
         val btn = findViewById<Button>(R.id.btn_delete_task)
         btn.setOnClickListener {
             detailTaskViewModel.deleteTask()
+            val intentToHome = Intent(this@DetailTaskActivity, TaskActivity::class.java)
+            startActivity(intentToHome)
         }
     }
 }
